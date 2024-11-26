@@ -1,90 +1,6 @@
 @charset "UTF-8";
-/* =================================================================== 
- * Monica Main Stylesheet
- * Template Ver. 1.0.0
- * 12-13-2022
- * ------------------------------------------------------------------
- *
- * TOC:
- * # SETTINGS
- *		## fonts
- *    	## colors
- *	  	## spacing and typescale
- *		## grid variables
- * # CSS RESET
- * # GRID
- *		## extra large devices
- *		## large devices
- *		## medium devices 
- *		## tablet devices
- *		## mobile devices
- *		## small mobile devices
- *		## additional column stackpoints 
- * # BASE SETUP
- * # UTILITY CLASSES
- * # TYPOGRAPHY 
- *		## additional typography & helper classes
- *		## lists
- *		## media 
- *		## spacing
- * # PRELOADER
- *		## page loaded
- * # FORM 
- *		## style placeholder text
- *		## change autocomplete styles in Chrome
- * # BUTTONS
- * # TABLE
- * # COMPONENTS
- *		## pagination 
- *		## alert box 
- *		## skillbars
- *		## stats tabs
- * # PROJECT-WIDE SHARED STYLES
- *		## list items
- *		## social list
- *		## blog card
- *		## testimonials
- *		## swiper overrides
- * # GRID-BASED LAYOUTS
- *		## grid block
- *		## list grid
- * # PAGE WRAP
- * # SITE HEADER
- *		## logo
- *		## main navigation
- *		## mobile menu toggle
- * # PAGEHEADER & PAGECONTENT
- * # INTRO
- *		## intro content
- *		## intro scroll down
- *		## intro transitions
- * # ABOUT
- * # EXPERTISE
- * # CLIENTS
- *		## clients list
- * # CTA
- * # JOURNAL
- * # FOOTER
- *		## newsletter
- *		## copyright
- *		## go top
- * # BLOG STYLES 
- * # PAGE STYLES 
- *		## services page
- *		## contact page
- *
- * ------------------------------------------------------------------ */
 
 
-/* ===================================================================
- * # SETTINGS
- *
- *
- * ------------------------------------------------------------------- */
-
-/* ------------------------------------------------------------------- 
- * ## fonts 
- * ------------------------------------------------------------------- */
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600&display=swap");
 
 :root {
@@ -4741,46 +4657,176 @@ td:last-child {
 	padding-left: 0;
 }
 
-
-
-
+/* Flip Card Container */
 .flip-card {
 	background-color: transparent;
-	width: 300px;
-	height: 300px;
+	width: 400px;
+	height: 400px; /* Adjust height to fit your content */
 	perspective: 1000px;
   }
   
+  /* Inner Flip Card */
   .flip-card-inner {
 	position: relative;
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	transition: transform 0.6s;
+	transition: transform 0.6s ease-in-out;
 	transform-style: preserve-3d;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   }
   
-  .flip-card:hover .flip-card-inner {
-	transform: rotateY(180deg);
-  }
-  
+  /* Front and Back of the Flip Card */
   .flip-card-front, .flip-card-back {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
+	overflow: hidden; /* Prevents content spillover */
   }
   
+  /* Front Side of the Card */
   .flip-card-front {
 	background-color: #bbb;
-	color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
   }
   
+  .flip-card-front img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill; /* Ensures the image scales properly */
+  }
+  
+  /* Back Side of the Card */
   .flip-card-back {
 	background-color: #2980b9;
 	color: white;
 	transform: rotateY(180deg);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start; /* Ensures content starts at the top */
+	padding: 20px; /* Space around the text */
+	overflow-y: auto; /* Enables scrolling for long content */
+  }
+  
+  /* Headings and Text Styling */
+  .flip-card-back h6 {
+	margin: 0;
+	font-size: 1.8rem; /* Increased for better readability */
+	font-weight: bold;
+	text-align: center;
+  }
+  
+  .flip-card-back p {
+	margin-top: 10px;
+	font-size: 1.2rem; /* Increased font size for body text */
+	line-height: 1.8; /* More line spacing for easier reading */
+	text-align: justify; /* Aligns text neatly */
+  }
+  
+  /* For Small Screens */
+  @media (max-width: 768px) {
+	.flip-card {
+	  width: 380px;
+	  height: 380px; /* Slightly smaller for mobile */
+	}
+  
+	.flip-card-back h6 {
+	  font-size: 1.6rem; /* Adjust heading size for small screens */
+	}
+  
+	.flip-card-back p {
+	  font-size: 1.1rem; /* Adjust body text size for small screens */
+	  line-height: 1.6;
+	}
   }
 
+
+ /* Container for horizontal alignment */
+.container {
+	display: flex;
+	flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+	gap: 100px; /* Space between cards */
+	justify-content: center; /* Center cards horizontally */
+	align-items: center; /* Align cards vertically */
+	padding: 10px; /* Add padding for better spacing */
+  }
+  
+  /* Panel (Card Container) */
+  .panel {
+	width: 360px;
+	height: 160px; /* Card dimensions */
+	position: relative;
+	font-family: 'helvetica neue', 'helvetica', 'arial', sans-serif;
+	font-weight: 300;
+	text-align: center; /* Center text horizontally */
+	-webkit-perspective: 1000px;
+	perspective: 1000px;
+  }
+  
+  /* Front and Back Styling */
+  .panel .front,
+  .panel .back {
+	padding: 20px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 3px solid #40a8f6;
+	backface-visibility: hidden;
+	-webkit-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+  }
+  
+  /* Centering Content */
+  .panel .front,
+  .panel .back {
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* Center content vertically */
+	align-items: center; /* Center content horizontally */
+  }
+  
+  /* Front Side */
+  .panel .front {
+	background: #40a8f6;
+	color: white;
+	transform: rotateY(0deg);
+  }
+  
+  /* Back Side */
+  .panel .back {
+	background: white;
+	color: black;
+	transform: rotateY(-180deg);
+	text-align: justify; /* Align text neatly */
+  }
+  
+  /* Hover Effects */
+  .panel:hover .front {
+	transform: rotateY(180deg);
+  }
+  
+  .panel:hover .back {
+	transform: rotateY(0deg);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+	.panel {
+	  width: 300px; /* Adjust card width for smaller screens */
+	  height: 140px; /* Adjust card height */
+	}
+  
+	.panel .front h4 {
+	  font-size: 1rem; /* Reduce font size for smaller screens */
+	}
+  
+	.panel .back p {
+	  font-size: 0.9rem; /* Adjust paragraph font size */
+	  line-height: 1.4;
+	}
+  }
+  

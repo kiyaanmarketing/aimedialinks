@@ -41,6 +41,46 @@
     }; // end ssPreloader
 
 
+  /* flip card
+ * -------------------------------------------------- */
+const ssFlipCard = function() {
+    console.log("47 => in ");
+    const flipCard = document.querySelector('.flip-card');
+    console.log("49 => flipCard  ", flipCard);
+    const flipCardInner = document.querySelector('.flip-card-inner');
+    console.log("51 => flipCardInner  ", flipCardInner);
+    if (!(flipCard && flipCardInner)) return; // Exit if no flip card is present
+
+    // Function to check visibility thresholds
+    const isInViewport = (element, threshold) => {
+        const rect = element.getBoundingClientRect();
+        const height = rect.height; // Element height
+        const viewportHeight = window.innerHeight; // Viewport height
+        const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0); // Visible height
+        const visiblePercentage = (visibleHeight / height) * 100; // Percentage visible
+        return visiblePercentage >= threshold;
+    };
+
+    // Add scroll event listener for mobile
+    const handleScroll = () => {
+        if (isInViewport(flipCard, 0)) {
+            console.log("Card at least 50% in view - flipping to back"); // Debugging
+            flipCardInner.style.transform = "rotateY(180deg)"; // Flip to back
+        } else if (!isInViewport(flipCard, 0)) {
+            console.log("Card less than 80% in view - flipping to front"); // Debugging
+            flipCardInner.style.transform = "rotateY(0deg)"; // Flip to front
+        }
+    };
+
+    // Add scroll event for mobile only
+    if (window.innerWidth <= 768) {
+        console.log("Mobile flip card scroll listener attached"); // Debugging
+        window.addEventListener('scroll', handleScroll);
+    }
+}; // end ssFlipCard
+
+
+
    /* mobile menu
     * ---------------------------------------------------- */ 
     const ssMobileMenu = function() {
@@ -380,6 +420,7 @@
         ssMailChimpForm();
         ssAlertBoxes();
         ssMoveTo();
+        ssFlipCard(); // Add flip card logic here
 
     })();
 
